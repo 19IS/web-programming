@@ -2,7 +2,7 @@
 
 ## Локальная установка и запуск
 
-:note: Для локального запуска приложения необходимо установить [docker и docker-compose](https://docs.docker.com/desktop/install/mac-install/).
+> **Note**: Для локального запуска приложения необходимо установить [docker и docker-compose](https://docs.docker.com/desktop/install/mac-install/).
 
 1. Создайте docker-контейнеры приложения с помощью команды
 
@@ -31,5 +31,5 @@
     ```bash
     docker exec -it node_js_web_app /bin/bash
     ```
-    
+
     Для выхода из среды введите `exit`
