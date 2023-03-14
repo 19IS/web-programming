@@ -1,41 +1,47 @@
 const express = require('express')
-const dotenv = require('dotenv').config()
+const expressHbs = require('express-handlebars')
+const hbs = require('hbs')
+const app = express()
+const path = require('path')
 
-const app = express();
+const dotenv = require('dotenv').config();
+
+
+app.set('views', __dirname + '/../frontend/templates');
+app.engine(
+  'hbs',
+  expressHbs.engine({
+    extname: 'hbs', 
+    defaultLayout: 'base', 
+    // viewsDir: __dirname + '/../frontend/templates/',
+    layoutsDir: __dirname + '/../frontend/templates/layouts/',
+    partialsDir: __dirname + '/../frontend/templates/partials/'
+  })
+);
+app.set('view engine', 'hbs')
+app.use(
+  express.static(path.join(__dirname, '/../frontend/static'))
+)
+// hbs.registerPartials(__dirname + '/templates/partials')
 const port = process.env.NODE_JS_APP_PORT;
 const host = process.env.NODE_JS_APP_HOST;
 
-app.set('view engine', 'hbs')
-app.set('views', __dirname + '/../frontend/views')
-app.set('view options', {
-    layout: 'layouts/layout'
+app.get('/', function (request, response) {
+  response.render(
+    'home', {
+      title: 'Главная страница'
+    }
+  );
+});
+
+app.get('/blog', function (request, responce) {
+  responce.render(
+    'blog'
+  )
 })
 
-app.get('/', (req, res) => {
-  res.render('index', {
-    username: req.query.username === undefined ? 'Никто' : req.query.username
-  });
-});
-
-app.get('/blog', (req, res) => {
-  res.render('blog', {
-    article: req.query.article === undefined ? 'Неизвестная статья' : req.query.article
-  });
-});
-
-app.get('/location', (req, res) => {
-  res.render('location', {
-    city: req.query.city === undefined ? 'Неизвестный город' : req.query.city
-  });
-});
-
-app.get('/service', (req, res) => {
-  res.render('service', {
-    service_name: req.query.service_name === undefined ? 'Неизвестная услуга' : req.query.service_name
-  });
-});
-
 app.listen(
-  port, 
+  port,
   () => console.log(`Сервер запущен на http://${host}:${port}`)
 );
+
