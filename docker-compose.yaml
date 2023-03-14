@@ -7,8 +7,24 @@ services:
       dockerfile: Dockerfile
     restart: always
     container_name: node_js_web_app
+    command: bash -c '
+      npm install nodemon -g;
+      nodemon backend/index.js;
+      '
     ports:
       - "3000:3000"
     volumes:
       - ${PWD}/:/web_app
-  
+  mongo_db:
+      image: mongo:6.0.2
+      container_name: mongo_db_node_js_container
+      restart: always
+      env_file:
+        - .env
+      ports:
+        - "27017:27017"
+      volumes:
+        - ${PWD}/.mongodb_data:/var/lib/mongodb/data
+      
+volumes:
+  mongodb_data:
