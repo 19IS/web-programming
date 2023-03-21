@@ -1,11 +1,26 @@
-const MongoClient = require("mongodb").MongoClient;
-const dotenv = require('dotenv').config();
+import dotenv from 'dotenv'
+import MongoClient from 'mongodb'
+import mongoose from 'mongoose';
+
+// const MongoClient = require("mongodb").MongoClient;
+const env = dotenv.config();
+
+
 const url = `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/`
 
 const mongoClient = new MongoClient(url)
 
 const users = [{name: "Bob", age: 35} , {name: "Alice", age: 21}, {name: "Tom", age: 45}];
 
+
+async function StartApp() {
+    try {
+        await mongoose.connect(url, {
+            useUnifiedTopology: true,
+            useNewUrlParser: true
+        })
+    }
+}
 
 async function run() {
     try {

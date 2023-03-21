@@ -74,6 +74,9 @@
   <aside class="blog-aside">
     <div class="aside-search">
       <h3 class="search-title">Поиск в блоге</h3>
+      {{#posts}}
+      <p>{{author}}</p>
+      {{/posts}}
       <div class="search-delimiter"></div>
       <input class="search-text" type="search" name="search-text" value="" placeholder="Введите слово">
       <input class="search-do" type="submit" name="search-do" value="Искать">
