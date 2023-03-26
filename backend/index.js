@@ -16,20 +16,20 @@ const app = express();
 
 const url = `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/`
 
+app.set('views', 'templates');
 
 app.engine(
   'hbs',
   expressHbs.engine({  
-    layoutsDir: __dirname + '/../frontend/templates/layouts',
+    layoutsDir: 'views/layouts',
     defaultLayout: 'base',
     extname: 'hbs',
 //    partialsDir: __dirname + '/../frontend/templates/partials/'
   })
 );
 app.set('view engine', 'hbs');
-app.set('views', __dirname + '/templates');
-app.set('view options', { layout: 'base'});
-hbs.registerPartials(__dirname + '/../frontend/templates/partials')
+//app.set('view options', { layout: 'base'});
+hbs.registerPartials(__dirname + '/views/partials')
 app.use(
   express.static(path.join(__dirname, '/../frontend/static'))
 )
@@ -59,12 +59,12 @@ const host = process.env.NODE_JS_APP_HOST;
 
 async function StartApp() {
   try {
-      await mongoose.connect(url, {
+      await mongoose.connect('mongodb://127.0.0.1:27017', {
           useUnifiedTopology: true,
           useNewUrlParser: true
       });
       app.listen(
-        port,
+        3000,
         () => console.log(`Сервер запущен на http://${host}:${port}`)
       );
   } catch (exception) {
