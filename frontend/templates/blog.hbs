@@ -3,73 +3,9 @@
 </section>
 <article class="blog-article">
   <div class="blog-container">
-    <!-- Запись в блоге -->
-    <section class="blog-card">
-      <div class="blog-header">
-        <div class="blog-cover">
-        </div>
-      </div>
-      <div class="blog-body">
-        <div class="blog-title">
-          <h2>Lorem ipsum dolor sit amet</h2>
-        </div>
-        <div class="blog-text">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed eiusmod tempor incididunt ut labore et dolore
-            magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ut aliquip ex ea commodo consequat. Duis
-            aute irure dolor
-            in reprehenderit in voluptate velit esse cillum dolore eu fugiat pariatur. Excepteur sint occaecat cupidatat
-            non proident,
-            sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        <div class="blog-tags">
-          <ul>
-            <li><a href="#">lorem</a></li>
-            <li><a href="#">proident</a></li>
-            <li><a href="#">amet</a></li>
-            <li><a href="#">laborum</a></li>
-          </ul>
-        </div>
-        <div class="blog-footer">
-          <div class="blog-published-date">
-            3 дня назад
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="blog-card">
-      <div class="blog-header">
-        <div class="blog-cover">
-        </div>
-      </div>
-      <div class="blog-body">
-        <div class="blog-title">
-          <h2>Lorem ipsum dolor sit amet</h2>
-        </div>
-        <div class="blog-text">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed eiusmod tempor incididunt ut labore et dolore
-            magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ut aliquip ex ea commodo consequat. Duis
-            aute irure dolor
-            in reprehenderit in voluptate velit esse cillum dolore eu fugiat pariatur. Excepteur sint occaecat cupidatat
-            non proident,
-            sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        <div class="blog-tags">
-          <ul>
-            <li><a href="#">lorem</a></li>
-            <li><a href="#">proident</a></li>
-            <li><a href="#">amet</a></li>
-            <li><a href="#">laborum</a></li>
-          </ul>
-        </div>
-        <div class="blog-footer">
-          <div class="blog-published-date">
-            3 дня назад
-          </div>
-        </div>
-      </div>
-    </section>
+    {{#posts}}
+    {{> blogCard }}
+    {{/posts}}
   </div>
   <aside class="blog-aside">
     <div class="aside-search">
@@ -84,20 +20,22 @@
     <div class="aside-recent">
       <h3 class="search-title">Популярные статьи</h3>
       <div class="search-delimiter"></div>
+      {{#posts}}
       <div class="recent-item">
-        <p>Ut enim ad minim veniam, quis nostrud</p>
-        <span>15/10/2021</span>
+        <p>{{title}}</p>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">Редактивировать</button>
+        <button type="button" 
+                class="btn btn-danger" 
+                data-bs-toggle="modal" 
+                data-bs-target="#deleteModal"
+                data-bs-id="{{ _id }}"
+        >
+          Удалить
+        </button>
       </div>
-
-      <div class="recent-item">
-        <p>Excepteur sint occaecat cupidatat</p>
-        <span>08/09/2021</span>
-      </div>
-
-      <div class="recent-item">
-        <p>Duis aute irure dolor in reprehenderit</p>
-        <span>29/08/2021</span>
-      </div>
+      {{/posts}}
     </div>
   </aside>
 </article>
+{{> deleteModal}}
+{{> editModal}}

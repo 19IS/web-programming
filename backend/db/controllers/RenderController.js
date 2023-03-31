@@ -5,10 +5,10 @@ class RenderController {
         response.render('home', {});
     }
     blogRender(request, response) {
-        axios.get('http://127.0.0.1:3000/blog/posts').then((response) => {
-            console.log(response);
+        axios.get('http://127.0.0.1:3000/blog/posts').then((res) => {
+            console.log(res);
             response.render('blog', {
-                posts: response.data
+                posts: res.data
             });
         }).catch(error => {
             response.send(error);

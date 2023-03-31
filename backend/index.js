@@ -17,22 +17,6 @@ const app = express();
 const url = `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/`
 
 
-app.engine(
-  'hbs',
-  expressHbs.engine({  
-    layoutsDir: __dirname + '/../frontend/templates/layouts',
-    defaultLayout: 'base',
-    extname: 'hbs',
-//    partialsDir: __dirname + '/../frontend/templates/partials/'
-  })
-);
-app.set('view engine', 'hbs');
-app.set('views', __dirname + '/templates');
-app.set('view options', { layout: 'base'});
-hbs.registerPartials(__dirname + '/../frontend/templates/partials')
-app.use(
-  express.static(path.join(__dirname, '/../frontend/static'))
-)
 app.use(
   express.json()
 )
