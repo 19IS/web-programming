@@ -5,15 +5,15 @@ class PostController {
         try {
             const { author, title, content, picture } = request.body;
             const post = await Post.create({
-              author,
-              title,
-              content,
-              picture
+                author,
+                title,
+                content,
+                picture
             });
             response.status(200).json(post);
-          } catch (exception) {
+        } catch (exception) {
             response.status(500).json(exception);
-          };
+        };
     };
     async getAll(request, responce) {
         try {
@@ -25,8 +25,8 @@ class PostController {
     };
     async getOne(request, responce) {
         try {
-            const {id} = request.params;
-            if (! id) {
+            const { id } = request.params;
+            if (!id) {
                 responce.status(400).json({
                     message: "Id не указан!"
                 });
@@ -39,7 +39,7 @@ class PostController {
     };
     async update(request, responce) {
         try {
-            const post =  request.body;
+            const post = request.body;
             if (!post._id) {
                 responce.status(400).json({
                     message: "Id не указан!"
@@ -47,8 +47,8 @@ class PostController {
             }
             const updatedPost = await Post.findByIdAndUpdate(
                 post._id,
-                post, 
-                {new: true}
+                post,
+                { new: true }
             )
             return responce.json(updatedPost);
         } catch (exception) {

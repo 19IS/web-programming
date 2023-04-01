@@ -1,11 +1,12 @@
 import axios from "axios";
+import { appHost, appPort } from '../../settings.js'
 
 class RenderController {
     indexRender(request, response) {
         response.render('home', {});
     }
     blogRender(request, response) {
-        axios.get('http://127.0.0.1:3000/blog/posts').then((res) => {
+        axios.get(`http://${appHost}:${appPort}/blog/posts`).then((res) => {
             console.log(res);
             response.render('blog', {
                 posts: res.data
@@ -13,7 +14,7 @@ class RenderController {
         }).catch(error => {
             response.send(error);
         });
-        
+
     }
     locationRender(request, response) {
         response.render('locataion', {});
