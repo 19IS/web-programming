@@ -1,6 +1,6 @@
 import Router from 'express';
 import { fileURLToPath } from 'url';
-import { dirname, join } from 'path'
+import { dirname, join } from 'path';
 import expressHbs from 'express-handlebars';
 import express from 'express';
 import hbs from 'hbs'

@@ -1,15 +1,10 @@
-import Post from './../models/Post.js';
+import PostService from '../services/PostService.js';
+
 
 class PostController {
     async create(request, response) {
         try {
-            const { author, title, content, picture } = request.body;
-            const post = await Post.create({
-                author,
-                title,
-                content,
-                picture
-            });
+            const post = await PostService.create(request.body, request.files.picture);
             response.status(200).json(post);
         } catch (exception) {
             response.status(500).json(exception);
@@ -17,8 +12,8 @@ class PostController {
     };
     async getAll(request, response) {
         try {
-            const posts = await Post.find();
-            response.json(posts);
+            const posts = await PostService.getAll();
+            response.status(200).json(posts);
         } catch (exception) {
             response.status(500).json(exception);
         }
@@ -30,8 +25,8 @@ class PostController {
                 return response.status(400).json({
                     message: "Id не указан!"
                 });
-            }
-            const post = await Post.findById(id);
+            };
+            const post = await PostService.getOne(id);
             return response.status(200).json(post);
         } catch (exception) {
             return response.status(500).json(exception);
@@ -39,18 +34,13 @@ class PostController {
     };
     async update(request, response) {
         try {
-            console.log(request.body);
             const post = request.body;
             if (!post._id) {
                 return response.status(400).json({
                     message: "Id не указан!"
                 });
             }
-            const updatedPost = await Post.findByIdAndUpdate(
-                post._id,
-                post,
-                { new: true }
-            )
+            const updatedPost = await PostService.update(post);
             return response.status(200).json(updatedPost);
         } catch (exception) {
             return response.status(500).json(exception);
@@ -64,8 +54,8 @@ class PostController {
                     message: "Id не указан!"
                 });
             }
-            const post = await Post.findByIdAndDelete(id);
-            return response.json(post);
+            const post = await PostService.delete(id);
+            return response.status(200).json(post);
         } catch (exception) {
             response.status(500).json(exception);
         }

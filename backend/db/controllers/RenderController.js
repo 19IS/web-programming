@@ -1,23 +1,27 @@
-import axios from "axios";
-import { appHost, appPort } from '../../settings.js'
+import PostService from "../services/PostService.js";
+
 
 class RenderController {
-    indexRender(request, response) {
-        response.render('home', {});
-    }
-    blogRender(request, response) {
-        axios.get(`http://${appHost}:${appPort}/blog/posts`).then((res) => {
-            response.render('blog', {
-                posts: res.data
-            });
-        }).catch(error => {
-            response.send(error);
-        });
 
-    }
-    locationRender(request, response) {
+    async indexRender(request, response) {
+        response.render('home', {});
+    };
+
+    async blogRender(request, response) {
+        const posts = await PostService.getAll();
+        const array = [];
+        posts.forEach(element => {
+            array.push(element.toJSON());
+        });
+        response.render('blog', {
+            posts: array
+        })
+    };
+
+    async locationRender(request, response) {
         response.render('locataion', {});
-    }
+    };
+
 }
 
 export default new RenderController();
