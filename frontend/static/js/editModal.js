@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     author: modalAuthor.value,
                     title: modalTitle.value,
                     content: modalBlogText.value,
-                    picture: null,
                     _id: postId
                 })
             }).then(() => {
