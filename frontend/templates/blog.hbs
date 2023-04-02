@@ -23,7 +23,14 @@
       {{#posts}}
       <div class="recent-item">
         <p>{{title}}</p>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">Редактивировать</button>
+        <button type="button" 
+                class="btn btn-primary" 
+                data-bs-toggle="modal" 
+                data-bs-target="#editModal"
+                data-bs-id="{{ _id }}"
+        >
+          Редактивировать
+        </button>
         <button type="button" 
                 class="btn btn-danger" 
                 data-bs-toggle="modal" 

@@ -19,7 +19,6 @@
   overflow: hidden;
 }
 .blog-cover {
-  background: lightgray url('../img/blog/blog02.jpg') center no-repeat;
   background-size: cover;
   height: 200px;
 }

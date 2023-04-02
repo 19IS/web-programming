@@ -3,15 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     deleteModal.addEventListener('show.bs.modal', event => {
 
-        const button = event.relatedTarget
+        const button = event.relatedTarget;
 
         const postId = button.getAttribute('data-bs-id')
 
         const modalTitle = deleteModal.querySelector('.modal-body')
-        const modalBodyInput = deleteModal.querySelector('.modal-dialog input')
 
         modalTitle.textContent = `Удалить запись с id:` + postId;
-        modalBodyInput.value = postId;
 
         deleteModal.addEventListener('hidden.bs.modal', () => {
             console.log('modal element completely hidden!');

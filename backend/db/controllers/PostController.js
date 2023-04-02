@@ -15,33 +15,34 @@ class PostController {
             response.status(500).json(exception);
         };
     };
-    async getAll(request, responce) {
+    async getAll(request, response) {
         try {
             const posts = await Post.find();
-            responce.json(posts);
+            response.json(posts);
         } catch (exception) {
-            responce.status(500).json(exception);
+            response.status(500).json(exception);
         }
     };
-    async getOne(request, responce) {
+    async getOne(request, response) {
         try {
             const { id } = request.params;
             if (!id) {
-                responce.status(400).json({
+                return response.status(400).json({
                     message: "Id не указан!"
                 });
             }
             const post = await Post.findById(id);
-            return responce.json(post);
+            return response.status(200).json(post);
         } catch (exception) {
-            responce.status(500).json(exception);
+            return response.status(500).json(exception);
         }
     };
-    async update(request, responce) {
+    async update(request, response) {
         try {
+            console.log(request.body);
             const post = request.body;
             if (!post._id) {
-                responce.status(400).json({
+                return response.status(400).json({
                     message: "Id не указан!"
                 });
             }
@@ -50,23 +51,23 @@ class PostController {
                 post,
                 { new: true }
             )
-            return responce.json(updatedPost);
+            return response.status(200).json(updatedPost);
         } catch (exception) {
-            responce.status(500).json(exception);
+            return response.status(500).json(exception);
         }
     };
-    async delete(request, responce) {
+    async delete(request, response) {
         try {
             const { id } = request.params;
             if (!id) {
-                responce.status(400).json({
+                response.status(400).json({
                     message: "Id не указан!"
                 });
             }
             const post = await Post.findByIdAndDelete(id);
-            return responce.json(post);
+            return response.json(post);
         } catch (exception) {
-            responce.status(500).json(exception);
+            response.status(500).json(exception);
         }
     };
 };

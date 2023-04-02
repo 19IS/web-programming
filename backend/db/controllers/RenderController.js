@@ -7,7 +7,6 @@ class RenderController {
     }
     blogRender(request, response) {
         axios.get(`http://${appHost}:${appPort}/blog/posts`).then((res) => {
-            console.log(res);
             response.render('blog', {
                 posts: res.data
             });
