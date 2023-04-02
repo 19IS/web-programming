@@ -6,7 +6,7 @@
 
 1. Скопируйте файл `example.env` в `.env` с помощью команды
 
-    ``bash
+    ```bash
     cp example.env .env
     ```
 
